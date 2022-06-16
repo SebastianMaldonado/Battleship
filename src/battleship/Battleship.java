@@ -1,5 +1,4 @@
 package battleship;
-import javax.swing.JOptionPane;
 public class Battleship {
 
     public static void main(String[] args) {

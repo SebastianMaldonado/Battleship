@@ -1,5 +1,7 @@
 package battleship;
 
+import javax.swing.JOptionPane;
+
 public class Tablero {
     public void imprimirTab(int matriz[][]) {
         for (int i = 0; i <= 9; i++) {
@@ -21,47 +23,47 @@ public class Tablero {
         boolean ent = true;
         if (hov) {
             while (ent && tam != i) {
-                System.out.println("Entro horizaontal");
                 if (y + i < 10) {
-                    if (matriz[x][y + i] != 0) {
+                    if (matriz[y + i][x] != 0) {
                         ent = false;
                     }
                     i = i + 1;
                 } else {
-                    System.out.println("El barco no puede ser colocado en esta posicion por su tamaño y orientacion");
+                    JOptionPane.showMessageDialog(null, "El barco no puede ser colocado en esta posicion por su tamaño y orientacion");
                     ent = false;
                 }
             }
             i = 0;
             if (ent) {
                 while (i != tam) {
-                    matriz[x][y + i] = 1;
+                    matriz[y + i][x] = 1;
+                    i = i + 1;
                 }
-                i = i + 1;
             } else {
-                System.out.println("No se ha podido poner el barco porque se encuentra ocupada la casilla");
+                JOptionPane.showMessageDialog(null, "No se ha podido poner el barco porque se encuentra ocupada la casilla");
+                ent = false;
             }
         } else {
-            System.out.println("Entro vertical");
             while (ent && tam != i) {
                 if (x + i < 10) {
-                    if (matriz[x + i][y] != 0) {
+                    if (matriz[y][x + i] != 0) {
                         ent = false;
                     }
                     i = i + 1;
                 } else {
-                    System.out.println("El barco no puede ser colocado en esta posicion por su tamaño y orientacion");
+                    JOptionPane.showMessageDialog(null, "El barco no puede ser colocado en esta posicion por su tamaño y orientacion");
                     ent = false;
                 }
             }
             i = 0;
             if (ent) {
                 while (i != tam) {
-                    matriz[x + i][y] = 1;
+                    matriz[y][x + i] = 1;
+                    i = i + 1;
                 }
-                i = i + 1;
             } else {
-                System.out.println("No se ha podido poner el barco porque se encuentra ocupada la casilla");
+                JOptionPane.showMessageDialog(null, "No se ha podido poner el barco porque se encuentra ocupada la casilla");
+                ent = false;
             }
         }
         return ent;

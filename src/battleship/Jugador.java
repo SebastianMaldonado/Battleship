@@ -44,21 +44,23 @@ public class Jugador {
         int z = 2;
         boolean hov, val = true;
         Object [] posicion = {"", "Horizontal", "Vertical"};
-        while (z != 6) {
+        while (z != 4) {
             do {
                 JOptionPane.showMessageDialog(null, "Digite la posicion del barco de tamaño " + z);
                 int x = Integer.parseInt(JOptionPane.showInputDialog("Posicion en x: "));
                 int y = Integer.parseInt(JOptionPane.showInputDialog("Posicion en y: "));
                 Object temp = JOptionPane.showInputDialog(null,"Selecciona una orientacion", "Elegir",JOptionPane.QUESTION_MESSAGE,null,posicion, posicion[0]);
                 if (temp.toString().equals("Horizontal")) {
-                    hov = true;
-                } else {
                     hov = false;
+                } else {
+                    hov = true;
                 }
                 System.out.println("Entro");
                 val = tab.ponerB(this.matrizB, x, y, hov, z);
-                z ++;
-            } while (val);
+                if (val) {
+                    z ++;
+                }
+            } while (val == false);
         }
     }
     
