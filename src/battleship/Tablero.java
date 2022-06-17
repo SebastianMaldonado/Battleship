@@ -26,11 +26,13 @@ public class Tablero {
                 if (y + i < 10) {
                     if (matriz[y + i][x] != 0) {
                         ent = false;
+                        return false;
                     }
                     i = i + 1;
                 } else {
                     JOptionPane.showMessageDialog(null, "El barco no puede ser colocado en esta posicion por su tamaño y orientacion");
                     ent = false;
+                    return false;
                 }
             }
             i = 0;
@@ -42,17 +44,20 @@ public class Tablero {
             } else {
                 JOptionPane.showMessageDialog(null, "No se ha podido poner el barco porque se encuentra ocupada la casilla");
                 ent = false;
+                return false;
             }
         } else {
             while (ent && tam != i) {
                 if (x + i < 10) {
                     if (matriz[y][x + i] != 0) {
                         ent = false;
+                        return false;
                     }
                     i = i + 1;
                 } else {
                     JOptionPane.showMessageDialog(null, "El barco no puede ser colocado en esta posicion por su tamaño y orientacion");
                     ent = false;
+                    return false;
                 }
             }
             i = 0;
@@ -64,6 +69,7 @@ public class Tablero {
             } else {
                 JOptionPane.showMessageDialog(null, "No se ha podido poner el barco porque se encuentra ocupada la casilla");
                 ent = false;
+                return false;
             }
         }
         return ent;

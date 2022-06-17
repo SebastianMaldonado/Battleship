@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 public class Jugador {
 
     Tablero tab = new Tablero();
+    Barcos listB = new Barcos();
 
     int matrizB[][] = new int[10][10];
     int matrizJ[][] = new int[10][10];
@@ -42,25 +43,20 @@ public class Jugador {
     public void iniciarB () {
         System.out.println("Nota: Las posiciones de X y Y van de 0 a 9");
         int z = 2;
-        boolean hov, val = true;
-        Object [] posicion = {"", "Horizontal", "Vertical"};
-        while (z != 4) {
-            do {
-                JOptionPane.showMessageDialog(null, "Digite la posicion del barco de tamaño " + z);
-                int x = Integer.parseInt(JOptionPane.showInputDialog("Posicion en x: "));
-                int y = Integer.parseInt(JOptionPane.showInputDialog("Posicion en y: "));
-                Object temp = JOptionPane.showInputDialog(null,"Selecciona una orientacion", "Elegir",JOptionPane.QUESTION_MESSAGE,null,posicion, posicion[0]);
-                if (temp.toString().equals("Horizontal")) {
-                    hov = false;
-                } else {
-                    hov = true;
+        while (z != 6) {
+            tab.imprimirTab(matrizB);
+            if (z == 3) {
+                int i = 0;
+                while (i != 2) {
+                    tab.imprimirTab(matrizB);
+                    this.pedirDatos(z);
+                    i++;
                 }
-                System.out.println("Entro");
-                val = tab.ponerB(this.matrizB, x, y, hov, z);
-                if (val) {
-                    z ++;
-                }
-            } while (val == false);
+                z++;
+            } else {
+                this.pedirDatos(z);
+                z++;
+            }
         }
     }
     
@@ -69,6 +65,36 @@ public class Jugador {
             tab.imprimirTab(this.matrizJ);
         } else {
             tab.imprimirTab(this.matrizB);
+        }
+    }
+
+    public void pedirDatos (int z) {
+        boolean hov, val = true;
+        int x = 0, y = 0;
+        Object [] posicion = {"", "Horizontal", "Vertical"};
+        do {
+            JOptionPane.showMessageDialog(null, "Digite la posicion del barco de tamaño " + z);
+            x = Integer.parseInt(JOptionPane.showInputDialog("Posicion en x: "));
+            y = Integer.parseInt(JOptionPane.showInputDialog("Posicion en y: "));
+            Object temp = JOptionPane.showInputDialog(null,"Selecciona una orientacion", "Elegir",JOptionPane.QUESTION_MESSAGE,null,posicion, posicion[0]);
+            if (temp.toString().equals("Horizontal")) {
+                hov = false;
+            } else {
+                hov = true;
+            }
+            System.out.println("Entro");
+            val = tab.ponerB(this.matrizB, x, y, hov, z);
+        } while (val == false);
+        listB.addBarcos(x, y, z, hov);
+    }
+
+    public void atacarB(int MatrizJ[][], int x, int y) {
+        if (MatrizJ[x][y] == 0) {
+            System.out.println("No hay barcos");
+            this.matrizJ[x][y] = 2;
+        } else {
+            System.out.println("Le has atinado a un barco");
+            this.matrizJ[x][y] = 1;
         }
     }
 }
